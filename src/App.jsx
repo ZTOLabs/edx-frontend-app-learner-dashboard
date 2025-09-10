@@ -6,7 +6,6 @@ import { logError } from '@edx/frontend-platform/logging';
 import { initializeHotjar } from '@edx/frontend-enterprise-hotjar';
 
 import { ErrorPage, AppContext } from '@edx/frontend-platform/react';
-import { FooterSlot } from '@edx/frontend-component-footer';
 import { Alert } from '@openedx/paragon';
 
 import { RequestKeys } from 'data/constants/requests';
@@ -23,11 +22,15 @@ import track from 'tracking';
 import fakeData from 'data/services/lms/fakeData/courses';
 
 import AppWrapper from 'containers/WidgetContainers/AppWrapper';
-import LearnerDashboardHeader from 'containers/LearnerDashboardHeader';
 
 import { getConfig } from '@edx/frontend-platform';
 import messages from './messages';
 import './App.scss';
+
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/plus-jakarta-sans/600.css';
+import '@fontsource/plus-jakarta-sans/700.css';
 
 export const App = () => {
   const { authenticatedUser } = React.useContext(AppContext);
@@ -75,23 +78,30 @@ export const App = () => {
     <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
-        <link rel="shortcut icon" href={getConfig().FAVICON_URL} type="image/x-icon" />
+        <link
+          rel="shortcut icon"
+          href={getConfig().FAVICON_URL}
+          type="image/x-icon"
+        />
       </Helmet>
       <div>
         <AppWrapper>
-          <LearnerDashboardHeader />
+          {/* <LearnerDashboardHeader /> */}
           <main id="main">
-            {hasNetworkFailure
-              ? (
-                <Alert variant="danger">
-                  <ErrorPage message={formatMessage(messages.errorMessage, { supportEmail })} />
-                </Alert>
-              ) : (
-                <Dashboard />
-              )}
+            {hasNetworkFailure ? (
+              <Alert variant="danger">
+                <ErrorPage
+                  message={formatMessage(messages.errorMessage, {
+                    supportEmail,
+                  })}
+                />
+              </Alert>
+            ) : (
+              <Dashboard />
+            )}
           </main>
         </AppWrapper>
-        <FooterSlot />
+        {/* <FooterSlot /> */}
       </div>
     </>
   );
