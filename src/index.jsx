@@ -21,7 +21,7 @@ import {
   subscribe,
   mergeConfig,
 } from '@edx/frontend-platform';
-import AppLayout from 'shared/Layouts/AppLayout';
+import AppLayout from 'shared/Components/Layouts/AppLayout';
 
 import { configuration } from "./config";
 
