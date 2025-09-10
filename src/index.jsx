@@ -21,24 +21,34 @@ import {
   subscribe,
   mergeConfig,
 } from '@edx/frontend-platform';
+import AppLayout from 'shared/Layouts/AppLayout';
 
-import { configuration } from './config';
+import { configuration } from "./config";
 
-import messages from './i18n';
+import messages from "./i18n";
 
-import App from './App';
-import NoticesWrapper from './components/NoticesWrapper';
+import App from "./App";
+import NoticesWrapper from "./components/NoticesWrapper";
 
 subscribe(APP_READY, () => {
-  const root = createRoot(document.getElementById('root'));
+  const root = createRoot(document.getElementById("root"));
 
   root.render(
     <StrictMode>
       <AppProvider store={store}>
         <NoticesWrapper>
           <Routes>
-            <Route path="/" element={<PageWrap><App /></PageWrap>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/" element={<AppLayout />}>
+              <Route
+                path="/"
+                element={(
+                  <PageWrap>
+                    <App />
+                  </PageWrap>
+                )}
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
           </Routes>
         </NoticesWrapper>
       </AppProvider>
