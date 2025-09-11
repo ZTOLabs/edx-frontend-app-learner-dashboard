@@ -14,10 +14,13 @@ import {
   SidebarMenu,
   SidebarSeparator,
 } from 'shared/Components/ui/sidebar';
+import { useIntl } from 'react-intl';
+
 import { useLanguageSwitch } from 'shared/hooks/useLanguageSwitch';
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Switch } from 'shared/Components/Switch';
+import messages from '../../../../messages';
 import Items from './Navigation/item';
 import AppLogo from '../AppLogo';
 import UserProfile from './UserProfile';
@@ -28,27 +31,6 @@ const getBaseRoute = (pathname: string): string => {
   return segments[0] || '';
 };
 
-const appNavigation = [
-  {
-    title: 'Home',
-    url: '/',
-    icon: HomeLine,
-    isActive: false,
-  },
-  {
-    title: 'Courses',
-    url: '/courses',
-    icon: ClipboardCheck,
-    isActive: false,
-  },
-  {
-    title: 'Discover',
-    url: '/discover',
-    icon: Globe01,
-    isActive: false,
-  },
-];
-
 const appSettingItems = [
   {
     url: '/notification',
@@ -58,6 +40,28 @@ const appSettingItems = [
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
   const location = useLocation();
+  const intl = useIntl();
+
+  const appNavigation = useMemo(() => [
+    {
+      title: intl.formatMessage(messages.home),
+      url: '/',
+      icon: HomeLine,
+      isActive: false,
+    },
+    {
+      title: intl.formatMessage(messages.courses),
+      url: '/courses',
+      icon: ClipboardCheck,
+      isActive: false,
+    },
+    {
+      title: intl.formatMessage(messages.discover),
+      url: '/discover',
+      icon: Globe01,
+      isActive: false,
+    },
+  ], [intl]);
 
   const navItems = useMemo(() => {
     const currentBaseRoute = getBaseRoute(location.pathname);
@@ -65,7 +69,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       ...item,
       isActive: getBaseRoute(item.url) === currentBaseRoute,
     }));
-  }, [location.pathname]);
+  }, [location.pathname, appNavigation]);
 
   return (
     <Sidebar

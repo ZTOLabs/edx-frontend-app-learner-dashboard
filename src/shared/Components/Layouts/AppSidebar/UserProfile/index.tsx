@@ -1,5 +1,6 @@
 import { getAuthenticatedUser, redirectToLogout } from '@edx/frontend-platform/auth';
 import { getConfig } from '@edx/frontend-platform';
+import { useIntl } from '@edx/frontend-platform/i18n';
 
 import {
   SidebarMenu,
@@ -13,18 +14,21 @@ import {
 } from 'shared/Components/ui/dropdown-menu';
 import { User01, LogOut01 } from '@untitledui/icons';
 import { useNavigate } from 'react-router';
-
-const menuItems = [
-  {
-    icon: User01,
-    label: 'Profile',
-    url: '/profile',
-  },
-];
+import { useMemo } from 'react';
+import messages from '../../../../../messages';
 
 const UserProfile = () => {
   const user = getAuthenticatedUser();
   const navigate = useNavigate();
+  const intl = useIntl();
+
+  const menuItems = useMemo(() => [
+    {
+      icon: User01,
+      label: intl.formatMessage(messages.profile),
+      url: '/profile',
+    },
+  ], [intl]);
 
   return (
     <SidebarMenu className="!tw-w-auto tw-list-none !tw-p-0">
@@ -73,7 +77,7 @@ const UserProfile = () => {
               onClick={() => redirectToLogout(getConfig().LMS_BASE_URL)}
             >
               <LogOut01 />
-              Log out
+              {intl.formatMessage(messages.logOut)}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
