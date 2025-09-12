@@ -3,12 +3,11 @@ import React from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
 
 import { reduxHooks } from 'hooks';
-import {
-  CourseFilterControls,
-} from 'containers/CourseFilterControls';
 import CourseListSlot from 'plugin-slots/CourseListSlot';
 import NoCoursesViewSlot from 'plugin-slots/NoCoursesViewSlot';
 
+import StatefulButtonWrapper from 'shared/Components/StatefulButtonWrapper';
+import { useNavigate } from 'react-router';
 import { useCourseListData } from './hooks';
 
 import messages from './messages';
@@ -22,14 +21,24 @@ import './index.scss';
 */
 export const CoursesPanel = () => {
   const { formatMessage } = useIntl();
+  const navigate = useNavigate();
   const hasCourses = reduxHooks.useHasCourses();
   const courseListData = useCourseListData();
   return (
-    <div className="course-list-container">
-      <div className="course-list-heading-container">
-        <h2 className="course-list-title">{formatMessage(messages.myCourses)}</h2>
-        <div className="course-filter-controls-container">
-          <CourseFilterControls {...courseListData.filterOptions} />
+    <div className="tw-flex tw-flex-col tw-gap-6">
+      <div className="tw-flex tw-justify-between tw-items-center">
+        <h3 className="tw-font-semibold tw-text-lg tw-text-gray-900 tw-m-0">
+          {formatMessage(messages.myCourses)}
+        </h3>
+        <div className="tw-flex tw-gap-2">
+          <StatefulButtonWrapper
+            className="!tw-w-auto"
+            variant="link"
+            size="sm"
+            disabled={false}
+            onClick={() => navigate('/courses')}
+            labels={{ default: formatMessage(messages.allCoursesBtnText) }}
+          />
         </div>
       </div>
       {hasCourses ? <CourseListSlot courseListData={courseListData} /> : <NoCoursesViewSlot />}
