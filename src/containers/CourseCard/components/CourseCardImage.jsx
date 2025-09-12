@@ -19,7 +19,7 @@ export const CourseCardImage = ({ cardId }) => {
   const { bannerImgSrc } = reduxHooks.useCardCourseData(cardId);
   const { name: providerName } = reduxHooks.useCardProviderData(cardId);
   const { homeUrl } = reduxHooks.useCardCourseRunData(cardId);
-  console.log('🚀 ~ CourseCardImage ~ name:', reduxHooks.useCardCourseRunData(cardId));
+
   const { isVerified } = reduxHooks.useCardEnrollmentData(cardId);
   const { disableCourseTitle } = useActionDisabledState(cardId);
   const handleImageClicked = reduxHooks.useTrackCourseEvent(courseImageClicked, cardId, homeUrl);
