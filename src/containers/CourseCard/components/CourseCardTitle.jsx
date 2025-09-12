@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import track from 'tracking';
 import { reduxHooks } from 'hooks';
+import { Link } from 'react-router-dom';
 import useActionDisabledState from './hooks';
 
 const { courseTitleClicked } = track.course;
@@ -16,22 +17,18 @@ export const CourseCardTitle = ({ cardId }) => {
     homeUrl,
   );
   const { disableCourseTitle } = useActionDisabledState(cardId);
-  return (
-    <h3>
-      {disableCourseTitle ? (
-        <span className="course-card-title" data-testid="CourseCardTitle">{courseName}</span>
-      ) : (
-        <a
-          href={homeUrl}
-          className="course-card-title"
-          data-testid="CourseCardTitle"
-          onClick={handleTitleClicked}
-        >
-          {courseName}
-        </a>
-      )}
-    </h3>
-  );
+
+  return (disableCourseTitle ? (
+    <span className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-full tw-truncate tw-line-clamp-1 hover:tw-no-underline" data-testid="CourseCardTitle">{courseName}</span>
+  ) : (
+    <Link
+      className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-full tw-truncate tw-line-clamp-1 hover:tw-no-underline"
+      to={homeUrl}
+      onClick={handleTitleClicked}
+    >
+      {courseName}
+    </Link>
+  ));
 };
 
 CourseCardTitle.propTypes = {
