@@ -4,11 +4,12 @@ import {
   File02,
   Lightning01,
 } from '@untitledui/icons';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { cn } from 'shared/lib/utils';
 import { CourseData } from 'shared/types/course';
-import InsightItem, { InsightData } from './card-item';
+import InsightItem, { InsightData } from './CardItem/card-item';
+import CourseUpdateBanner from './CourseUpdateBanner/course-update-banner';
 
 interface InsightProps {
   className?: string;
@@ -25,6 +26,13 @@ const Insight: React.FC<InsightProps> = ({
 }) => {
   const courseData = useSelector((state: AppState) => state.app.courseData);
   const courses = Object.values(courseData || {});
+
+  // TODO: Replace with actual initial state from backend
+  const [isCourseUpdateBannerOpen, setIsCourseUpdateBannerOpen] = useState(true);
+
+  const handleCloseCourseUpdateBanner = () => {
+    setIsCourseUpdateBannerOpen(false);
+  };
 
   // Calculate insights from actual course data
   const completedCourses = courses.filter(
@@ -70,13 +78,16 @@ const Insight: React.FC<InsightProps> = ({
   ], [completedCourses, ongoingCourses]);
 
   return (
-    <div className={cn('tw-grid tw-grid-cols-4 tw-gap-4', className)}>
-      {dynamicInsights.map((insight) => (
-        <InsightItem
-          key={insight.id}
-          insight={insight}
-        />
-      ))}
+    <div className="tw-flex tw-flex-col tw-gap-4">
+      {isCourseUpdateBannerOpen && <CourseUpdateBanner onClose={handleCloseCourseUpdateBanner} />}
+      <div className={cn('tw-grid tw-grid-cols-4 tw-gap-4', className)}>
+        {dynamicInsights.map((insight) => (
+          <InsightItem
+            key={insight.id}
+            insight={insight}
+          />
+        ))}
+      </div>
     </div>
   );
 };
