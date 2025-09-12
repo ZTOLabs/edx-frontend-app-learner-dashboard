@@ -84,25 +84,23 @@ export const App = () => {
           type="image/x-icon"
         />
       </Helmet>
-      <div>
-        <AppWrapper>
-          {/* <LearnerDashboardHeader /> */}
-          <main id="main">
-            {hasNetworkFailure ? (
-              <Alert variant="danger">
-                <ErrorPage
-                  message={formatMessage(messages.errorMessage, {
-                    supportEmail,
-                  })}
-                />
-              </Alert>
-            ) : (
-              <Dashboard />
-            )}
-          </main>
-        </AppWrapper>
-        {/* <FooterSlot /> */}
-      </div>
+      <AppWrapper>
+        {/* <LearnerDashboardHeader /> */}
+        <main id="main" className="tw-flex-1 tw-overflow-auto tw-min-h-0">
+          {hasNetworkFailure ? (
+            <Alert variant="danger">
+              <ErrorPage
+                message={formatMessage(messages.errorMessage, {
+                  supportEmail,
+                })}
+              />
+            </Alert>
+          ) : (
+            <Dashboard />
+          )}
+        </main>
+      </AppWrapper>
+      {/* <FooterSlot /> */}
     </>
   );
 };

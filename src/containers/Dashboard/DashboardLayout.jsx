@@ -34,7 +34,7 @@ export const DashboardLayout = ({ children }) => {
     <Container fluid size="xl" className="!tw-px-0 tw-flex tw-flex-col tw-gap-8 tw-h-full">
       <SubHeader title={intl.formatMessage(messages.headintTitle, { userName: username })} />
       <Insight />
-      <div className="tw-flex-1 tw-overflow-hidden">
+      <div className="tw-flex-1">
         {children}
       </div>
     </Container>
