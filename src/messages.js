@@ -1,6 +1,11 @@
 import { defineMessages } from '@edx/frontend-platform/i18n';
 
 const messages = defineMessages({
+  headintTitle: {
+    id: 'learner-dash.headingTitle',
+    description: 'Welcome message',
+    defaultMessage: 'Welcome, {userName}!',
+  },
   loadingSR: {
     id: 'learner-dash.loadingSR',
     description: 'Page loading screen-reader text',

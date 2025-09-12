@@ -81,3 +81,23 @@ body, html {
     overflow: hidden;
   }
 }
+
+.pgn__card .pgn__card-header .pgn__card-header-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  overflow: auto;
+  text-align: start;
+  width: 100%;
+  gap: 4px;
+}
+
+.pgn__card .pgn__card-header .pgn__card-header-actions {
+  margin-top: 0;
+  margin-inline-start: 0;
+}
+
+.btn-icon {
+  width: 24px;
+  height: 24px;
+}
