@@ -10,6 +10,7 @@ import * as module from './hooks';
 
 export const state = StrictDict({
   sortBy: (val) => React.useState(val), // eslint-disable-line
+  searchTerm: (val) => React.useState(val), // eslint-disable-line
 });
 
 /**
@@ -24,10 +25,9 @@ export const useCourseListData = () => {
   const removeFilter = reduxHooks.useRemoveFilter();
   const pageNumber = reduxHooks.usePageNumber();
   const setPageNumber = reduxHooks.useSetPageNumber();
-  const searchTerm = reduxHooks.useSearchTerm();
-  const setSearchTerm = reduxHooks.useSetSearchTerm();
 
   const [sortBy, setSortBy] = module.state.sortBy(SortKeys.enrolled);
+  const [searchTerm, setSearchTerm] = module.state.searchTerm('');
 
   const querySearch = queryString.parse(window.location.search, { parseNumbers: true });
 
