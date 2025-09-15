@@ -12,6 +12,7 @@ const initialState = {
   suggestedCourses: [],
   selectSessionModal: {},
   filters: [],
+  searchTerm: '',
 };
 
 export const cardId = (val) => `card-${val}`;
@@ -66,6 +67,11 @@ const app = createSlice({
     clearFilters: (state) => ({
       ...state,
       filters: [],
+    }),
+    setSearchTerm: (state, { payload }) => ({
+      ...state,
+      searchTerm: payload,
+      pageNumber: 1, // Reset to first page when searching
     }),
   },
 });

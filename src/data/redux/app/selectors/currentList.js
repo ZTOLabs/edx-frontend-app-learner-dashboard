@@ -27,20 +27,35 @@ export const courseFilterFn = filters => (filters.length
   ? course => filters.reduce((match, filter) => match && courseFilters[filter](course), true)
   : () => true);
 
+export const courseSearchFn = searchTerm => {
+  if (!searchTerm || searchTerm.trim() === '') {
+    return () => true;
+  }
+  const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+  return course => {
+    const courseName = course.course.courseName.toLowerCase();
+    const courseNumber = course.course.courseNumber ? course.course.courseNumber.toLowerCase() : '';
+    return courseName.includes(normalizedSearchTerm) || courseNumber.includes(normalizedSearchTerm);
+  };
+};
+
 export const currentList = (allCourses, {
   sortBy,
   filters,
+  searchTerm = '',
 }) => allCourses
   .filter(module.courseFilterFn(filters))
+  .filter(module.courseSearchFn(searchTerm))
   .sort(module.sortFn(transforms[sortBy], { reverse: sortBy === SortKeys.enrolled }));
 
 export const visibleList = (state, {
   sortBy,
   filters,
   pageSize,
+  searchTerm,
 }) => {
   const courses = Object.values(simpleSelectors.courseData(state));
-  const list = module.currentList(courses, { sortBy, filters });
+  const list = module.currentList(courses, { sortBy, filters, searchTerm });
   const pageNumber = simpleSelectors.pageNumber(state);
 
   if (pageSize === 0) {
