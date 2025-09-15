@@ -19,7 +19,7 @@ export const Dashboard = () => {
         ? (<LoadingView />)
         : (
           <DashboardLayout>
-            <CoursesPanel />
+            <CoursesPanel isFeatured />
           </DashboardLayout>
         )}
     </div>

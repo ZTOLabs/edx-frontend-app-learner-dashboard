@@ -24,6 +24,8 @@ export const useCourseListData = () => {
   const removeFilter = reduxHooks.useRemoveFilter();
   const pageNumber = reduxHooks.usePageNumber();
   const setPageNumber = reduxHooks.useSetPageNumber();
+  const searchTerm = reduxHooks.useSearchTerm();
+  const setSearchTerm = reduxHooks.useSetSearchTerm();
 
   const [sortBy, setSortBy] = module.state.sortBy(SortKeys.enrolled);
 
@@ -32,6 +34,7 @@ export const useCourseListData = () => {
   const { numPages, visibleList } = reduxHooks.useCurrentCourseList({
     sortBy,
     filters,
+    searchTerm,
     pageSize: querySearch?.disable_pagination === 1 ? 0 : ListPageSize,
   });
 
@@ -47,6 +50,10 @@ export const useCourseListData = () => {
       setSortBy,
       filters,
       handleRemoveFilter,
+    },
+    searchOptions: {
+      searchTerm,
+      setSearchTerm,
     },
     showFilters: filters.length > 0,
   };

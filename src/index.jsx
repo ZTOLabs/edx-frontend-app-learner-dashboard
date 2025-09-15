@@ -23,15 +23,16 @@ import {
 } from '@edx/frontend-platform';
 import AppLayout from 'shared/Components/Layouts/AppLayout';
 
-import { configuration } from "./config";
+import Courses from 'pages/courses';
+import { configuration } from './config';
 
-import messages from "./i18n";
+import messages from './i18n';
 
-import App from "./App";
-import NoticesWrapper from "./components/NoticesWrapper";
+import App from './App';
+import NoticesWrapper from './components/NoticesWrapper';
 
 subscribe(APP_READY, () => {
-  const root = createRoot(document.getElementById("root"));
+  const root = createRoot(document.getElementById('root'));
 
   root.render(
     <StrictMode>
@@ -44,6 +45,14 @@ subscribe(APP_READY, () => {
                 element={(
                   <PageWrap>
                     <App />
+                  </PageWrap>
+                )}
+              />
+              <Route
+                path="/courses"
+                element={(
+                  <PageWrap>
+                    <Courses />
                   </PageWrap>
                 )}
               />
