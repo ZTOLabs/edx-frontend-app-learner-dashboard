@@ -19,10 +19,10 @@ export const CourseCardTitle = ({ cardId }) => {
   const { disableCourseTitle } = useActionDisabledState(cardId);
 
   return (disableCourseTitle ? (
-    <span className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-full tw-truncate tw-line-clamp-1 hover:tw-no-underline" data-testid="CourseCardTitle">{courseName}</span>
+    <span className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-fit tw-truncate tw-line-clamp-1 hover:tw-no-underline tw-max-w-full" data-testid="CourseCardTitle">{courseName}</span>
   ) : (
     <Link
-      className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-full tw-truncate tw-line-clamp-1 hover:tw-no-underline"
+      className="tw-text-sm tw-font-semibold tw-text-gray-900 tw-w-fit tw-truncate tw-line-clamp-1 hover:tw-no-underline tw-max-w-full"
       to={homeUrl}
       onClick={handleTitleClicked}
     >
