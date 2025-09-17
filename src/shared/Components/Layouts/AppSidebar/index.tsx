@@ -19,6 +19,8 @@ import { useLanguageSwitch } from 'shared/hooks/useLanguageSwitch';
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Switch } from 'shared/Components/Switch';
+import HomeLineSolidIcon from 'shared/Icons/HomeLineSolidIcon';
+import ClipboardCheckSolidIcon from 'shared/Icons/ClipboardCheckSolidIcon';
 import messages from '../../../../messages';
 import Items from './Navigation/item';
 import AppLogo from '../AppLogo';
@@ -40,12 +42,14 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       title: intl.formatMessage(messages.home),
       url: '/',
       icon: HomeLine,
+      activeIcon: HomeLineSolidIcon,
       isActive: false,
     },
     {
       title: intl.formatMessage(messages.courses),
       url: '/courses',
       icon: ClipboardCheck,
+      activeIcon: ClipboardCheckSolidIcon,
       isActive: false,
     },
     {
