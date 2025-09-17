@@ -24,6 +24,7 @@ export const useCourseFilterControlsData = ({
 }) => {
   const [isOpen, toggleOpen, toggleClose] = useToggle(false);
   const [target, setTarget] = module.state.target(null);
+  const [targetSort, setTargetSort] = module.state.target(null);
 
   const addFilter = reduxHooks.useAddFilter();
   const removeFilter = reduxHooks.useRemoveFilter();
@@ -52,6 +53,8 @@ export const useCourseFilterControlsData = ({
     close,
     target,
     setTarget,
+    targetSort,
+    setTargetSort,
     handleFilterChange,
     handleSortChange,
   };

@@ -10,6 +10,7 @@ import * as module from './hooks';
 
 export const state = StrictDict({
   sortBy: (val) => React.useState(val), // eslint-disable-line
+  searchTerm: (val) => React.useState(val), // eslint-disable-line
 });
 
 /**
@@ -26,12 +27,14 @@ export const useCourseListData = () => {
   const setPageNumber = reduxHooks.useSetPageNumber();
 
   const [sortBy, setSortBy] = module.state.sortBy(SortKeys.enrolled);
+  const [searchTerm, setSearchTerm] = module.state.searchTerm('');
 
   const querySearch = queryString.parse(window.location.search, { parseNumbers: true });
 
   const { numPages, visibleList } = reduxHooks.useCurrentCourseList({
     sortBy,
     filters,
+    searchTerm,
     pageSize: querySearch?.disable_pagination === 1 ? 0 : ListPageSize,
   });
 
@@ -47,6 +50,10 @@ export const useCourseListData = () => {
       setSortBy,
       filters,
       handleRemoveFilter,
+    },
+    searchOptions: {
+      searchTerm,
+      setSearchTerm,
     },
     showFilters: filters.length > 0,
   };

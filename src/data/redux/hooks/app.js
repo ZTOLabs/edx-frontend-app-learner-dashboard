@@ -10,6 +10,7 @@ const actions = redux.actions.app;
 /** Simple Selectors **/
 export const usePageNumber = () => useSelector(selectors.pageNumber);
 export const useFilters = () => useSelector(selectors.filters);
+export const useSearchTerm = () => useSelector(selectors.searchTerm);
 export const useEmailConfirmationData = () => useSelector(selectors.emailConfirmation);
 export const useEnterpriseDashboardData = () => useSelector(selectors.enterpriseDashboard);
 export const usePlatformSettingsData = () => useSelector(selectors.platformSettings);
@@ -95,6 +96,11 @@ export const useRemoveFilter = () => {
 export const useClearFilters = () => {
   const dispatch = useDispatch();
   return (value) => dispatch(actions.clearFilters(value));
+};
+
+export const useSetSearchTerm = () => {
+  const dispatch = useDispatch();
+  return (value) => dispatch(actions.setSearchTerm(value));
 };
 
 export const useLoadData = () => {

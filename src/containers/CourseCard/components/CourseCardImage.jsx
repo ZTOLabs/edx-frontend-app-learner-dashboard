@@ -7,27 +7,31 @@ import { Badge } from '@openedx/paragon';
 import track from 'tracking';
 import { reduxHooks } from 'hooks';
 import verifiedRibbon from 'assets/verified-ribbon.png';
+import { cn } from 'shared/lib/utils';
 import useActionDisabledState from './hooks';
 
 import messages from '../messages';
 
 const { courseImageClicked } = track.course;
 
-export const CourseCardImage = ({ cardId, orientation }) => {
+export const CourseCardImage = ({ cardId }) => {
   const { formatMessage } = useIntl();
   const { bannerImgSrc } = reduxHooks.useCardCourseData(cardId);
+  const { name: providerName } = reduxHooks.useCardProviderData(cardId);
   const { homeUrl } = reduxHooks.useCardCourseRunData(cardId);
+
   const { isVerified } = reduxHooks.useCardEnrollmentData(cardId);
   const { disableCourseTitle } = useActionDisabledState(cardId);
   const handleImageClicked = reduxHooks.useTrackCourseEvent(courseImageClicked, cardId, homeUrl);
-  const wrapperClassName = `pgn__card-wrapper-image-cap d-inline-block overflow-visible ${orientation}`;
+
+  const badges = [providerName].filter(Boolean);
+
   const image = (
     <>
       <img
-        // w-100 is necessary for images on Safari, otherwise stretches full height of the image
-        // https://stackoverflow.com/a/44250830
-        className="pgn__card-image-cap w-100 show"
-        src={bannerImgSrc}
+          // object-fit: cover ensures the image covers the entire container while maintaining aspect ratio
+        className="tw-w-full tw-h-full tw-object-cover"
+        src={bannerImgSrc ?? 'https://placehold.co/600x400'}
         alt={formatMessage(messages.bannerAlt)}
       />
       {
@@ -45,24 +49,51 @@ export const CourseCardImage = ({ cardId, orientation }) => {
       }
     </>
   );
-  return disableCourseTitle
-    ? (<div className={wrapperClassName}>{image}</div>)
-    : (
-      <a
-        className={wrapperClassName}
-        href={homeUrl}
-        onClick={handleImageClicked}
-        tabIndex="-1"
-      >
-        {image}
-      </a>
-    );
-};
-CourseCardImage.propTypes = {
-  cardId: PropTypes.string.isRequired,
-  orientation: PropTypes.string.isRequired,
+  return (
+    <>
+      {
+        disableCourseTitle
+          ? (<div className="tw-h-[144px] tw-w-full tw-rounded-[8px] tw-relative tw-overflow-hidden tw-flex tw-items-center tw-justify-center">{image}</div>)
+          : (
+            <a
+              className="tw-h-[144px] tw-w-full tw-rounded-[8px] tw-relative tw-overflow-hidden tw-flex tw-items-center tw-justify-center"
+              href={homeUrl}
+              onClick={handleImageClicked}
+              tabIndex="-1"
+            >
+              {image}
+            </a>
+          )
+      }
+      <BadgesList badges={badges} />
+    </>
+  );
 };
 
 CourseCardImage.defaultProps = {};
+
+CourseCardImage.propTypes = {
+  cardId: PropTypes.string.isRequired,
+};
+
+const BadgesList = ({ badges }) => (
+  <div className="tw-absolute tw-top-0 tw-left-0 tw-p-3 tw-flex tw-flex-row tw-gap-1">
+    {badges.map((badge) => (
+      <div className={cn(
+        'tw-bg-[#101828] tw-bg-opacity-60 tw-px-[6px] tw-py-[2px] tw-rounded-[6px]',
+        'tw-backdrop-blur-[8px]',
+      )}
+      >
+        <span className="tw-text-gray-200 tw-font-medium tw-text-xs tw-truncate tw-line-clamp-1">{badge}</span>
+      </div>
+    ))}
+  </div>
+);
+
+BadgesList.propTypes = {
+  badges: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+BadgesList.defaultProps = {};
 
 export default CourseCardImage;

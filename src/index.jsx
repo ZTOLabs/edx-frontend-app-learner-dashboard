@@ -21,7 +21,9 @@ import {
   subscribe,
   mergeConfig,
 } from '@edx/frontend-platform';
+import AppLayout from 'shared/Components/Layouts/AppLayout';
 
+import Courses from 'pages/courses';
 import { configuration } from './config';
 
 import messages from './i18n';
@@ -37,8 +39,25 @@ subscribe(APP_READY, () => {
       <AppProvider store={store}>
         <NoticesWrapper>
           <Routes>
-            <Route path="/" element={<PageWrap><App /></PageWrap>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/" element={<AppLayout />}>
+              <Route
+                path="/"
+                element={(
+                  <PageWrap>
+                    <App />
+                  </PageWrap>
+                )}
+              />
+              <Route
+                path="/courses"
+                element={(
+                  <PageWrap>
+                    <Courses />
+                  </PageWrap>
+                )}
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
           </Routes>
         </NoticesWrapper>
       </AppProvider>

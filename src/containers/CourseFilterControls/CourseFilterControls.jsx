@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
 
@@ -6,16 +6,15 @@ import {
   Button,
   Form,
   Icon,
+  IconButton,
   ModalPopup,
-  Sheet,
-  breakpoints,
-  useWindowSize,
-  ModalCloseButton,
+  useToggle,
 } from '@openedx/paragon';
-import { Close, Tune } from '@openedx/paragon/icons';
 
 import { reduxHooks } from 'hooks';
 
+import { cn } from 'shared/lib/utils';
+import { ChevronDown, FilterLines } from '@untitledui/icons';
 import FilterForm from './components/FilterForm';
 import SortForm from './components/SortForm';
 import useCourseFilterControlsData from './hooks';
@@ -29,6 +28,18 @@ export const CourseFilterControls = ({
   filters,
 }) => {
   const { formatMessage } = useIntl();
+
+  const SortOptions = useMemo(() => [
+    {
+      label: formatMessage(messages.sortLastEnrolled),
+      value: 'enrolled',
+    },
+    {
+      label: formatMessage(messages.sortTitle),
+      value: 'title',
+    },
+  ], [formatMessage]);
+
   const hasCourses = reduxHooks.useHasCourses();
   const {
     isOpen,
@@ -36,73 +47,88 @@ export const CourseFilterControls = ({
     close,
     target,
     setTarget,
+    targetSort,
+    setTargetSort,
     handleFilterChange,
     handleSortChange,
   } = useCourseFilterControlsData({
     filters,
     setSortBy,
   });
-  const { width } = useWindowSize();
-  const isMobile = width < breakpoints.small.minWidth;
+  const [isOpenSort, toggleOpenSort, toggleCloseSort] = useToggle(false);
 
   return (
-    <div id="course-filter-controls">
-      <Button
-        ref={setTarget}
-        variant="outline-primary"
-        iconBefore={Tune}
-        onClick={open}
-        disabled={!hasCourses}
-      >
-        {formatMessage(messages.refine)}
-      </Button>
-      <Form>
-        {isMobile
-          ? (
-            <Sheet
-              className="w-75"
-              position="left"
-              show={isOpen}
-              onClose={close}
+    <div className="tw-flex tw-flex-row tw-gap-3">
+      <div id="course-filter-controls-sort-button">
+        <Button
+          ref={setTargetSort}
+          variant="outline-primary"
+          iconAfter={ChevronDown}
+          onClick={toggleOpenSort}
+          disabled={!hasCourses}
+          className={cn(
+            'tw-bg-white tw-rounded-[100px] tw-px-[14px] tw-py-[10px]',
+            'tw-border tw-border-solid tw-border-gray-300',
+            'tw-shadow-xs',
+            'tw-text-gray-700 tw-text-sm tw-font-semibold',
+            'after:tw-hidden',
+          )}
+        >
+          {SortOptions.find(option => option.value === sortBy)?.label}
+        </Button>
+        <Form>
+          <ModalPopup
+            positionRef={targetSort}
+            isOpen={isOpenSort}
+            onClose={toggleCloseSort}
+            placement="bottom-end"
+          >
+            <div
+              id="course-filter-controls-card"
+              className="bg-white p-3 rounded shadow d-flex flex-row"
             >
-              <div className="p-1 mr-3">
-                <b>{formatMessage(messages.refine)}</b>
-              </div>
-              <hr />
-              <div className="filter-form-row">
-                <FilterForm {...{ filters, handleFilterChange }} />
-              </div>
-              <div className="filter-form-row text-left m-1">
+              <div className="filter-form-col text-left m-1">
                 <SortForm {...{ sortBy, handleSortChange }} />
               </div>
-              <div className="pgn__modal-close-container">
-                <ModalCloseButton variant="tertiary" onClick={close}>
-                  <Icon src={Close} />
-                </ModalCloseButton>
-              </div>
-            </Sheet>
-          ) : (
-            <ModalPopup
-              positionRef={target}
-              isOpen={isOpen}
-              onClose={close}
-              placement="bottom-end"
-            >
-              <div
-                id="course-filter-controls-card"
-                className="bg-white p-3 rounded shadow d-flex flex-row"
-              >
-                <div className="filter-form-col">
-                  <FilterForm {...{ filters, handleFilterChange }} />
-                </div>
-                <hr className="h-100 bg-primary-200 mx-3 my-0" />
-                <div className="filter-form-col text-left m-1">
-                  <SortForm {...{ sortBy, handleSortChange }} />
-                </div>
-              </div>
-            </ModalPopup>
+            </div>
+          </ModalPopup>
+        </Form>
+      </div>
+
+      <div id="course-filter-controls-filter-button">
+        <IconButton
+          className={cn(
+            'tw-bg-white tw-rounded-[100px] tw-px-[14px] tw-py-[10px]',
+            'tw-border tw-border-solid tw-border-gray-300',
+            'tw-shadow-xs',
+            'tw-text-gray-700 tw-text-sm tw-font-semibold',
+            'after:tw-hidden',
+            '!tw-w-10 !tw-h-10',
           )}
-      </Form>
+          src={FilterLines}
+          ref={setTarget}
+          iconAs={Icon}
+          onClick={open}
+          variant="outline-primary"
+        />
+        <Form>
+          <ModalPopup
+            positionRef={target}
+            isOpen={isOpen}
+            onClose={close}
+            placement="bottom-end"
+          >
+            <div
+              id="course-filter-controls-card"
+              className="bg-white p-3 rounded shadow d-flex flex-row"
+            >
+              <div className="filter-form-col">
+                <FilterForm {...{ filters, handleFilterChange }} />
+              </div>
+            </div>
+          </ModalPopup>
+        </Form>
+      </div>
     </div>
   );
 };
