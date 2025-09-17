@@ -86,7 +86,6 @@ export const App = () => {
       </Helmet>
       <div>
         <AppWrapper>
-          {/* <LearnerDashboardHeader /> */}
           <main id="main">
             {hasNetworkFailure ? (
               <Alert variant="danger">
@@ -101,7 +100,6 @@ export const App = () => {
             )}
           </main>
         </AppWrapper>
-        {/* <FooterSlot /> */}
       </div>
     </>
   );
