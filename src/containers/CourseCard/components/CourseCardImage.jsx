@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
 
@@ -14,6 +14,8 @@ import messages from '../messages';
 
 const { courseImageClicked } = track.course;
 
+const fallbackImageSrc = 'https://placehold.co/600x400';
+
 export const CourseCardImage = ({ cardId }) => {
   const { formatMessage } = useIntl();
   const { bannerImgSrc } = reduxHooks.useCardCourseData(cardId);
@@ -24,6 +26,13 @@ export const CourseCardImage = ({ cardId }) => {
   const { disableCourseTitle } = useActionDisabledState(cardId);
   const handleImageClicked = reduxHooks.useTrackCourseEvent(courseImageClicked, cardId, homeUrl);
 
+  const [imageError, setImageError] = useState(false);
+
+  const imageSrc = useMemo(
+    () => (imageError || !bannerImgSrc ? fallbackImageSrc : bannerImgSrc),
+    [imageError, bannerImgSrc],
+  );
+
   const badges = [providerName].filter(Boolean);
 
   const image = (
@@ -31,8 +40,11 @@ export const CourseCardImage = ({ cardId }) => {
       <img
           // object-fit: cover ensures the image covers the entire container while maintaining aspect ratio
         className="tw-w-full tw-h-full tw-object-cover"
-        src={bannerImgSrc ?? 'https://placehold.co/600x400'}
+        src={imageSrc}
         alt={formatMessage(messages.bannerAlt)}
+        onError={() => {
+          setImageError(true);
+        }}
       />
       {
         isVerified && (
