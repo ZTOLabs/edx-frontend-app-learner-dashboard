@@ -1,9 +1,3 @@
-import {
-  ClipboardCheck,
-  ClockStopwatch,
-  File02,
-  Lightning01,
-} from '@untitledui/icons';
 import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { cn } from 'shared/lib/utils';
