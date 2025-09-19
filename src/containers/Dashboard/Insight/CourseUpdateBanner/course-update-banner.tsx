@@ -10,11 +10,11 @@ import clockImage from '../../../../assets/images/clock.png';
 const FAKE_DATA = [
   {
     id: 1,
-    content: '<p>Update mới nè học sinh, vào đây để coi <a href="youtube.com">youtube</a> chơi nha</p>',
+    content: 'The course <a href="#">“AI for Educators: From Literacy to Practical Application”</a> will end on September 10, 2025',
   },
   {
     id: 2,
-    content: '<p>You have a Math Quiz 2 due on August 25, 2025 <a href="youtube.com">(Mathematics 5A)</a></p>',
+    content: 'You have a Homework due on August 25, 2025 <a href="#">(Generative AI for Journalism)</a>',
   },
 ];
 

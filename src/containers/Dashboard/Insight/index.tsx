@@ -50,14 +50,16 @@ const Insight: React.FC<InsightProps> = ({
       icon: <File02 className="tw-text-blueLight-600 tw-size-4" />,
       iconBg: 'tw-bg-blueLight-100',
       label: 'On Going Courses',
-      value: ongoingCourses.toString(),
+      // FAKE: value: ongoingCourses.toString(),
+      value: '3',
     },
     {
       id: 'completed-courses',
       icon: <ClipboardCheck className="tw-text-brand-600 tw-size-4" />,
       iconBg: 'tw-bg-brand-100',
       label: 'Completed',
-      value: completedCourses.toString(),
+      // FAKE: value: completedCourses.toString(),
+      value: '5',
     },
     {
       id: 'hours-learned',
@@ -65,7 +67,7 @@ const Insight: React.FC<InsightProps> = ({
       iconBg: 'tw-bg-teal-100',
       label: 'Hours Learned',
       // TODO: Replace with actual hours learned
-      value: '0',
+      value: '20',
     },
     {
       id: 'streak-days',
@@ -73,9 +75,9 @@ const Insight: React.FC<InsightProps> = ({
       iconBg: 'tw-bg-orange-100',
       label: 'Streak(Days)',
       // TODO: Replace with actual streak days
-      value: '0',
+      value: '3',
     },
-  ], [completedCourses, ongoingCourses]);
+  ], []);
 
   return (
     <div className="tw-flex tw-flex-col tw-gap-4">
