@@ -14,7 +14,7 @@ export const Dashboard = () => {
   const initIsPending = reduxHooks.useRequestIsPending(RequestKeys.initialize);
 
   return (
-    <div id="dashboard-content" data-testid="dashboard-content" className="tw-h-full">
+    <div id="dashboard-content" data-testid="dashboard-content" className="tw-h-fit tw-pb-8">
       {initIsPending
         ? (<LoadingView />)
         : (
