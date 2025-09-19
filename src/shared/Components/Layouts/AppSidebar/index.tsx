@@ -21,6 +21,7 @@ import { useLocation } from 'react-router-dom';
 import { Switch } from 'shared/Components/Switch';
 import HomeLineSolidIcon from 'shared/Icons/HomeLineSolidIcon';
 import ClipboardCheckSolidIcon from 'shared/Icons/ClipboardCheckSolidIcon';
+import Globe01SolidIcon from 'shared/Icons/Globe01SolidIcon';
 import messages from '../../../../messages';
 import Items from './Navigation/item';
 import AppLogo from '../AppLogo';
@@ -56,6 +57,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
       title: intl.formatMessage(messages.discover),
       url: '/discover',
       icon: Globe01,
+      activeIcon: Globe01SolidIcon,
       isActive: false,
     },
   ], [intl]);
