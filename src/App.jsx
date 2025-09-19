@@ -85,7 +85,6 @@ export const App = () => {
         />
       </Helmet>
       <AppWrapper>
-        {/* <LearnerDashboardHeader /> */}
         <main id="main" className="tw-flex-1 tw-overflow-auto tw-min-h-0">
           {hasNetworkFailure ? (
             <Alert variant="danger">
@@ -100,7 +99,6 @@ export const App = () => {
           )}
         </main>
       </AppWrapper>
-      {/* <FooterSlot /> */}
     </>
   );
 };

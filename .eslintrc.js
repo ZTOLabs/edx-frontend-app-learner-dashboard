@@ -11,7 +11,6 @@ const config = createConfig('eslint', {
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
   },
-  ignorePatterns: ['src/shared/Components/ui/**/*'],
 });
 
 config.settings = {
