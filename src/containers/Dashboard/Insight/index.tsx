@@ -8,6 +8,10 @@ import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { cn } from 'shared/lib/utils';
 import { CourseData } from 'shared/types/course';
+import File02SolidIcon from 'shared/Icons/File02SolidIcon';
+import ClipboardCheckSolidIcon from 'shared/Icons/ClipboardCheckSolidIcon';
+import ClockStopwatchSolidIcon from 'shared/Icons/ClockStopwatchSolidIcon';
+import Lightning01SolidIcon from 'shared/Icons/Lightning01SolidIcon';
 import InsightItem, { InsightData } from './CardItem/card-item';
 import CourseUpdateBanner from './CourseUpdateBanner/course-update-banner';
 
@@ -47,7 +51,7 @@ const Insight: React.FC<InsightProps> = ({
   const dynamicInsights: InsightData[] = useMemo(() => [
     {
       id: 'ongoing-courses',
-      icon: <File02 className="tw-text-blueLight-600 tw-size-4" />,
+      icon: <File02SolidIcon className="tw-text-blueLight-600 tw-size-4" />,
       iconBg: 'tw-bg-blueLight-100',
       label: 'On Going Courses',
       // FAKE: value: ongoingCourses.toString(),
@@ -55,7 +59,7 @@ const Insight: React.FC<InsightProps> = ({
     },
     {
       id: 'completed-courses',
-      icon: <ClipboardCheck className="tw-text-brand-600 tw-size-4" />,
+      icon: <ClipboardCheckSolidIcon className="tw-text-brand-600 tw-size-4" />,
       iconBg: 'tw-bg-brand-100',
       label: 'Completed',
       // FAKE: value: completedCourses.toString(),
@@ -63,7 +67,7 @@ const Insight: React.FC<InsightProps> = ({
     },
     {
       id: 'hours-learned',
-      icon: <ClockStopwatch className="tw-text-teal-600 tw-size-4" />,
+      icon: <ClockStopwatchSolidIcon className="tw-text-teal-600 tw-size-4" />,
       iconBg: 'tw-bg-teal-100',
       label: 'Hours Learned',
       // TODO: Replace with actual hours learned
@@ -71,7 +75,7 @@ const Insight: React.FC<InsightProps> = ({
     },
     {
       id: 'streak-days',
-      icon: <Lightning01 className="tw-text-orange-600 tw-size-4" />,
+      icon: <Lightning01SolidIcon className="tw-text-orange-600 tw-size-4" />,
       iconBg: 'tw-bg-orange-100',
       label: 'Streak(Days)',
       // TODO: Replace with actual streak days
