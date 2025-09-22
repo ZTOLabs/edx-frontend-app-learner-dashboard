@@ -9,7 +9,7 @@ export const CourseListSlot = ({ courseListData }) => (
     idAliases={['course_list_slot']}
     pluginProps={{ courseListData }}
   >
-    <CourseList courseListData={courseListData} />
+    <CourseList courseListData={courseListData} maxItem={3} />
   </PluginSlot>
 );
 

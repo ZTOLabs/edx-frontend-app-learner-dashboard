@@ -15,6 +15,7 @@ import CourseCardActions from './components/CourseCardActions';
 
 export const CourseCard = ({
   cardId,
+  progressBar,
 }) => (
   <div id={cardId} data-testid="CourseCard">
     <Card className={cn(
@@ -36,7 +37,7 @@ export const CourseCard = ({
         actions={<CourseCardMenu cardId={cardId} />}
       />
       <div className="tw-flex tw-flex-row tw-gap-2 ">
-        <CourseProgressBar cardId={cardId} />
+        <CourseProgressBar cardId={cardId} progressBar={progressBar} />
         <CourseCardActions cardId={cardId} />
       </div>
     </Card>
@@ -44,6 +45,7 @@ export const CourseCard = ({
 );
 CourseCard.propTypes = {
   cardId: PropTypes.string.isRequired,
+  progressBar: PropTypes.string,
 };
 
 export default CourseCard;

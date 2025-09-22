@@ -2,10 +2,10 @@ import { ProgressBar } from '@openedx/paragon';
 import React from 'react';
 import { cn } from 'shared/lib/utils';
 
-const CourseProgressBar = () => {
+const CourseProgressBar = ({ progressBar }: { progressBar: string }) => {
   // TODO: remove this once we have the progress from the API
   // const { progress } = reduxHooks.useCardCourseRunData(cardId);
-  const progress = 30;
+  const progress = progressBar;
   return (
     <div className="tw-w-full tw-h-full tw-flex tw-flex-col tw-justify-between">
       <span className="tw-font-medium tw-text-xs tw-text-gray-700 tw-block">
