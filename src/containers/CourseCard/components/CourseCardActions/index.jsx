@@ -17,7 +17,7 @@ export const CourseCardActions = ({ cardId }) => {
   const { isArchived } = reduxHooks.useCardCourseRunData(cardId);
 
   return (
-    <div className={cn('tw-w-8 tw-h-8 tw-shadow-xs')}>
+    <div className={cn('tw-w-8 tw-h-8 tw-shadow-xs tw-rounded-[8px]')}>
       {isEntitlement && (isFulfilled
         ? <ViewCourseButton cardId={cardId} />
         : <SelectSessionButton cardId={cardId} />

@@ -20,7 +20,7 @@ export const CourseCard = ({
   <div id={cardId} data-testid="CourseCard">
     <Card className={cn(
       'tw-bg-white/70 tw-border tw-border-solid tw-border-white tw-h-full',
-      'tw-rounded-2xl tw-p-2 tw-pb-4',
+      'tw-rounded-2xl tw-p-2',
       'tw-flex tw-flex-col tw-gap-4',
       'tw-shadow-none',
     )}
