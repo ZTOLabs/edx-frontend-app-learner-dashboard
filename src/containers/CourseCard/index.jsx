@@ -6,11 +6,12 @@ import { Card } from '@openedx/paragon';
 import { cn } from 'shared/lib/utils';
 import CourseCardImage from './components/CourseCardImage';
 import CourseCardMenu from './components/CourseCardMenu';
-import CourseCardActions from './components/CourseCardActions';
 import CourseCardDetails from './components/CourseCardDetails';
 import CourseCardTitle from './components/CourseCardTitle';
 
 import './CourseCard.scss';
+import CourseProgressBar from './components/CourseProgressBar';
+import CourseCardActions from './components/CourseCardActions';
 
 export const CourseCard = ({
   cardId,
@@ -34,9 +35,9 @@ export const CourseCard = ({
               }
         actions={<CourseCardMenu cardId={cardId} />}
       />
-      <div className="tw-flex tw-flex-row tw-gap-4">
-        {/* <CourseCardBanners cardId={cardId} /> */}
-        {/* <CourseCardActions cardId={cardId} /> */}
+      <div className="tw-flex tw-flex-row tw-gap-2 ">
+        <CourseProgressBar cardId={cardId} />
+        <CourseCardActions cardId={cardId} />
       </div>
     </Card>
   </div>
