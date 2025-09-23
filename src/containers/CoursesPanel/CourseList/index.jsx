@@ -22,9 +22,7 @@ export const CourseList = ({ courseListData, maxItem }) => {
   } = courseListData;
   const isCollapsed = useIsCollapsed();
 
-  const courseList = visibleList.visibleList || visibleList;
-
-  const limitedCourseList = maxItem ? courseList.slice(0, maxItem) : courseList;
+  const limitedCourseList = maxItem ? visibleList.slice(0, maxItem) : visibleList;
 
   const visibleListWithProgressBar = limitedCourseList.map(({ cardId }) => ({
     cardId,
