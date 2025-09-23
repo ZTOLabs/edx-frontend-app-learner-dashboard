@@ -1,0 +1,14 @@
+{
+  "extends": "@edx/typescript-config",
+  "compilerOptions": {
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "jsx": "react-jsx",
+    "paths": {
+      "*": ["*"],
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["*.js", ".eslintrc.js", "dist", "node_modules"]
+}
