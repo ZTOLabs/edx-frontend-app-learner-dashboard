@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ActionRow } from '@openedx/paragon';
-
 import { reduxHooks } from 'hooks';
 
-import CourseCardActionSlot from 'plugin-slots/CourseCardActionSlot';
+import { cn } from 'shared/lib/utils';
 import SelectSessionButton from './SelectSessionButton';
 import BeginCourseButton from './BeginCourseButton';
 import ResumeButton from './ResumeButton';
@@ -19,20 +17,19 @@ export const CourseCardActions = ({ cardId }) => {
   const { isArchived } = reduxHooks.useCardCourseRunData(cardId);
 
   return (
-    <ActionRow data-test-id="CourseCardActions">
-      <CourseCardActionSlot cardId={cardId} />
+    <div className={cn('tw-w-8 tw-h-8 tw-shadow-xs tw-rounded-[8px]')}>
       {isEntitlement && (isFulfilled
         ? <ViewCourseButton cardId={cardId} />
         : <SelectSessionButton cardId={cardId} />
       )}
       {(isArchived && !isEntitlement) && (
-        <ViewCourseButton cardId={cardId} />
+      <ViewCourseButton cardId={cardId} />
       )}
       {!(isArchived || isEntitlement) && (hasStarted
         ? <ResumeButton cardId={cardId} />
         : <BeginCourseButton cardId={cardId} />
       )}
-    </ActionRow>
+    </div>
   );
 };
 CourseCardActions.propTypes = {

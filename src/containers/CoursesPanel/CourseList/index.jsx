@@ -9,11 +9,26 @@ import CourseCard from 'containers/CourseCard';
 
 import { useIsCollapsed } from './hooks';
 
-export const CourseList = ({ courseListData }) => {
+const progressBarMapping = {
+  'card-0': '30',
+  'card-1': '60',
+  'card-2': '90',
+  'card-3': '100',
+};
+
+export const CourseList = ({ courseListData, maxItem }) => {
   const {
     filterOptions, setPageNumber, numPages, showFilters, visibleList,
   } = courseListData;
   const isCollapsed = useIsCollapsed();
+
+  const limitedCourseList = maxItem ? visibleList.slice(0, maxItem) : visibleList;
+
+  const visibleListWithProgressBar = limitedCourseList.map(({ cardId }) => ({
+    cardId,
+    progressBar: progressBarMapping[cardId],
+  }));
+
   return (
     <>
       {showFilters && (
@@ -22,8 +37,8 @@ export const CourseList = ({ courseListData }) => {
         </div>
       )}
       <div className="tw-grid tw-grid-cols-3 tw-gap-4">
-        {visibleList.map(({ cardId }) => (
-          <CourseCard key={cardId} cardId={cardId} />
+        {visibleListWithProgressBar.map(({ cardId, progressBar }) => (
+          <CourseCard key={cardId} cardId={cardId} progressBar={progressBar} />
         ))}
         {numPages > 1 && (
           <Pagination
@@ -49,6 +64,7 @@ export const courseListDataShape = PropTypes.shape({
 
 CourseList.propTypes = {
   courseListData: courseListDataShape,
+  maxItem: PropTypes.number,
 };
 
 export default CourseList;

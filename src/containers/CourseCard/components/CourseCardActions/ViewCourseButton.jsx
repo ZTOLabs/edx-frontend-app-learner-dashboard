@@ -5,8 +5,10 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 
 import track from 'tracking';
 import { reduxHooks } from 'hooks';
+import { Icon, IconButtonWithTooltip } from '@openedx/paragon';
+import { cn } from 'shared/lib/utils';
+import { ArrowUpRight } from '@untitledui/icons';
 import useActionDisabledState from '../hooks';
-import ActionButton from './ActionButton';
 import messages from './messages';
 
 export const ViewCourseButton = ({ cardId }) => {
@@ -20,14 +22,25 @@ export const ViewCourseButton = ({ cardId }) => {
     homeUrl,
   );
   return (
-    <ActionButton
+    <IconButtonWithTooltip
+      tooltipContent={formatMessage(messages.viewCourse)}
+      tooltipPlacement="bottom"
+      src={ArrowUpRight}
+      iconAs={Icon}
+      iconClassNames="!tw-size-5"
       disabled={disableViewCourse}
-      as="a"
-      href="#"
       onClick={handleClick}
-    >
-      {formatMessage(messages.viewCourse)}
-    </ActionButton>
+      className={
+        cn(
+          '!tw-size-8 tw-w-8',
+          'tw-border tw-border-solid tw-border-gray-300',
+          'tw-rounded-[8px]',
+          'hover:!tw-bg-brand-600 hover:!tw-text-white',
+          'focus:!tw-bg-transparent',
+          'active:!tw-border-transparent',
+        )
+      }
+    />
   );
 };
 ViewCourseButton.propTypes = {
