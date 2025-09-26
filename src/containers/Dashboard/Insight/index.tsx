@@ -6,8 +6,10 @@ import File02SolidIcon from 'shared/Icons/File02SolidIcon';
 import ClipboardCheckSolidIcon from 'shared/Icons/ClipboardCheckSolidIcon';
 import ClockStopwatchSolidIcon from 'shared/Icons/ClockStopwatchSolidIcon';
 import Lightning01SolidIcon from 'shared/Icons/Lightning01SolidIcon';
+import { useIntl } from '@edx/frontend-platform/i18n';
 import InsightItem, { InsightData } from './CardItem/card-item';
 import CourseUpdateBanner from './CourseUpdateBanner/course-update-banner';
+import messages from '../../../messages';
 
 interface InsightProps {
   className?: string;
@@ -22,6 +24,7 @@ interface AppState {
 const Insight: React.FC<InsightProps> = ({
   className,
 }) => {
+  const { formatMessage } = useIntl();
   const courseData = useSelector((state: AppState) => state.app.courseData);
   const courses = Object.values(courseData || {});
 
@@ -47,7 +50,7 @@ const Insight: React.FC<InsightProps> = ({
       id: 'ongoing-courses',
       icon: <File02SolidIcon className="tw-text-blueLight-600 tw-size-4" />,
       iconBg: 'tw-bg-blueLight-100',
-      label: 'Ongoing courses',
+      label: formatMessage(messages.ongoingCourses),
       // FAKE: value: ongoingCourses.toString(),
       value: '3',
     },
@@ -55,7 +58,7 @@ const Insight: React.FC<InsightProps> = ({
       id: 'completed-courses',
       icon: <ClipboardCheckSolidIcon className="tw-text-brand-600 tw-size-4" />,
       iconBg: 'tw-bg-brand-100',
-      label: 'Completed courses',
+      label: formatMessage(messages.completedCourses),
       // FAKE: value: completedCourses.toString(),
       value: '5',
     },
@@ -63,7 +66,7 @@ const Insight: React.FC<InsightProps> = ({
       id: 'hours-learned',
       icon: <ClockStopwatchSolidIcon className="tw-text-teal-600 tw-size-4" />,
       iconBg: 'tw-bg-teal-100',
-      label: 'Hours Learned',
+      label: formatMessage(messages.hoursLearned),
       // TODO: Replace with actual hours learned
       value: '20',
     },
@@ -71,11 +74,11 @@ const Insight: React.FC<InsightProps> = ({
       id: 'streak-days',
       icon: <Lightning01SolidIcon className="tw-text-orange-600 tw-size-4" />,
       iconBg: 'tw-bg-orange-100',
-      label: 'Streak(Days)',
+      label: formatMessage(messages.streakDays),
       // TODO: Replace with actual streak days
       value: '3',
     },
-  ], []);
+  ], [formatMessage]);
 
   return (
     <div className="tw-flex tw-flex-col tw-gap-4">
