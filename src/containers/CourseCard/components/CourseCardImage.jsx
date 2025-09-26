@@ -91,7 +91,7 @@ CourseCardImage.propTypes = {
 };
 
 const BadgesList = ({ badges }) => (
-  <div className="tw-absolute tw-top-0 tw-left-0 tw-p-3 tw-flex tw-flex-row tw-gap-1">
+  <div className="tw-absolute tw-top-0 tw-left-0 tw-p-5 tw-flex tw-flex-row tw-gap-1">
     {badges.map((badge) => (
       <div className={cn(
         'tw-bg-[#101828] tw-bg-opacity-60 tw-px-[6px] tw-py-[2px] tw-rounded-[6px]',
