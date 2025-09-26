@@ -1,7 +1,7 @@
 import {
   ClipboardCheck,
   HomeLine,
-  Globe01,
+  GlobeSlated01,
 } from '@untitledui/icons';
 import {
   Sidebar,
@@ -56,7 +56,7 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     {
       title: intl.formatMessage(messages.discover),
       url: '/discover',
-      icon: Globe01,
+      icon: GlobeSlated01,
       activeIcon: Globe01SolidIcon,
       isActive: false,
     },
