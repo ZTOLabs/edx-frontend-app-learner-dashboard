@@ -11,6 +11,7 @@ import { cn } from 'shared/lib/utils';
 import useActionDisabledState from './hooks';
 
 import messages from '../messages';
+import { getCourseRunFromCourseId } from '../../../utils';
 
 const { courseImageClicked } = track.course;
 
@@ -20,7 +21,8 @@ export const CourseCardImage = ({ cardId }) => {
   const { formatMessage } = useIntl();
   const { bannerImgSrc } = reduxHooks.useCardCourseData(cardId);
   const { name: providerName } = reduxHooks.useCardProviderData(cardId);
-  const { homeUrl } = reduxHooks.useCardCourseRunData(cardId);
+  const { homeUrl, courseId } = reduxHooks.useCardCourseRunData(cardId);
+  const courseRun = getCourseRunFromCourseId(courseId);
 
   const { isVerified } = reduxHooks.useCardEnrollmentData(cardId);
   const { disableCourseTitle } = useActionDisabledState(cardId);
@@ -33,7 +35,7 @@ export const CourseCardImage = ({ cardId }) => {
     [imageError, bannerImgSrc],
   );
 
-  const badges = [providerName].filter(Boolean);
+  const badges = [providerName, courseRun].filter(Boolean);
 
   const image = (
     <>
