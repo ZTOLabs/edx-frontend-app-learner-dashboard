@@ -24,7 +24,7 @@ const messages = defineMessages({
   pageTitle: {
     id: 'learner-dash.title',
     description: 'Page title: Learner Home',
-    defaultMessage: 'Learner Home',
+    defaultMessage: 'Octo',
   },
   profile: {
     id: 'learning.navigation.profile.label',

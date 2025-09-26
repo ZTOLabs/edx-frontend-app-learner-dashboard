@@ -80,8 +80,8 @@ export const App = () => {
         <title>{formatMessage(messages.pageTitle)}</title>
         <link
           rel="shortcut icon"
-          href={getConfig().FAVICON_URL}
-          type="image/x-icon"
+          href="/favicon.svg"
+          type="image/svg+xml"
         />
       </Helmet>
       <AppWrapper>
