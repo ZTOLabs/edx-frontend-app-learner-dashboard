@@ -1,24 +1,40 @@
-import React from 'react';
 import { cn } from 'shared/lib/utils';
-import { useIntl } from '@edx/frontend-platform/i18n';
+import { useIntl, getLocale } from '@edx/frontend-platform/i18n';
 import messages from 'messages';
 import './course-update-banner.scss';
 import { Button } from 'shared/Components/ui/button';
 import { XClose } from '@untitledui/icons';
 import clockImage from '../../../../assets/images/clock.png';
 
-const FAKE_DATA = [
-  {
-    id: 1,
-    content: 'The course <a href="#">“AI for Educators: From Literacy to Practical Application”</a> will end on September 10, 2025',
-  },
-  {
-    id: 2,
-    content: 'You have a Homework due on August 25, 2025 <a href="#">(Generative AI for Journalism)</a>',
-  },
-];
+const getFakeData = (locale: string) => {
+  const FAKE_DATA_MAP = {
+    en: [
+      {
+        id: 1,
+        content: 'The course <a href="#">“AI for Educators: From Literacy to Practical Application”</a> will end on September 10, 2025',
+      },
+      {
+        id: 2,
+        content: 'You have a Homework due on August 25, 2025 <a href="#">(Generative AI for Journalism)</a>',
+      },
+    ],
+    vi: [
+      {
+        id: 1,
+        content: 'Khóa học <a href="#">“AI dành cho nhà giáo dục: Từ kiến ​​thức đến ứng dụng thực tế”</a> sẽ kết thúc vào ngày 10 tháng 9 năm 2025',
+      },
+      {
+        id: 2,
+        content: 'Bạn có Bài tập về nhà phải nộp vào ngày 25 tháng 8 năm 2025 <a href="#">(Trí tuệ nhân tạo cho lĩnh vực Báo chí)</a>',
+      },
+    ]
+  }
+  return FAKE_DATA_MAP[locale] || [];
+};
 
 const CourseUpdateBanner = ({ onClose }: { onClose: () => void }) => {
+  const locale = getLocale();
+  const fakeData = getFakeData(locale);
   const { formatMessage } = useIntl();
 
   // TODO: Replace with actual data from backend when it's available
@@ -41,7 +57,7 @@ const CourseUpdateBanner = ({ onClose }: { onClose: () => void }) => {
         {formatMessage(messages.courseUpdateBannerTitle)}
       </h3>
       <ul className="tw-flex tw-flex-col tw-gap-[6px] tw-m-0 tw-pl-6">
-        {FAKE_DATA.map(item => (
+        {fakeData.map(item => (
           <li
             key={item.id}
             className="tw-text-sm tw-text-gray-700 !tw-mb-0 course-update-content"

@@ -1,0 +1,15 @@
+{
+    "learner-dash.headingTitle": "Chào mừng đến với {platformName}, {userName}!",
+    "learning.navigation.home.label": "Trang chủ",
+    "learning.navigation.courses.label": "Khóa học",
+    "learning.navigation.discover.label": "Khám phá",
+    "learner-dash.courseUpdateBannerTitle": "Thời hạn sắp tới",
+    "learner-dash.insight.ongoingCourses": "Khóa học đang diễn ra",
+    "learner-dash.insight.completedCourses": "Khóa học đã hoàn thành",
+    "learner-dash.insight.hoursLearned": "Số giờ đã học",
+    "learner-dash.insight.streakDays": "Chuỗi hoạt động (ngày)",
+    "dashboard.mycourses": "Khóa học của tôi",
+    "dashboard.allcourses": "Xem tất cả",
+    "learner-dash.courseCard.progress": "Tiến độ: {progress}%",
+    "learner-dash.courseCard.CourseCardDetails.endDate": "Ngày kết thúc: {endDate}"
+}

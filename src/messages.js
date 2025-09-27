@@ -51,6 +51,26 @@ const messages = defineMessages({
     defaultMessage: 'Discover',
     description: 'The accessible label for discover navigation',
   },
+  ongoingCourses: {
+    id: 'learner-dash.insight.ongoingCourses',
+    defaultMessage: 'Ongoing courses',
+    description: 'The accessible label for ongoing courses',
+  },
+  completedCourses: {
+    id: 'learner-dash.insight.completedCourses',
+    defaultMessage: 'Completed courses',
+    description: 'The accessible label for completed courses',
+  },
+  hoursLearned: {
+    id: 'learner-dash.insight.hoursLearned',
+    defaultMessage: 'Hours learned',
+    description: 'The accessible label for hours learned',
+  },
+  streakDays: {
+    id: 'learner-dash.insight.streakDays',
+    defaultMessage: 'Streak (days)',
+    description: 'The accessible label for streak days',
+  },
 });
 
 export default messages;

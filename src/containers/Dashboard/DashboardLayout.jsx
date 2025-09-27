@@ -8,6 +8,7 @@ import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import Insight from './Insight';
 
 import messages from '../../messages';
+import { PLATFORM_NAME } from '../../constants';
 
 export const columnConfig = {
   courseList: {
@@ -32,7 +33,7 @@ export const DashboardLayout = ({ children }) => {
 
   return (
     <Container fluid size="xl" className="!tw-px-0 tw-flex tw-flex-col tw-gap-8 tw-h-full">
-      <SubHeader title={intl.formatMessage(messages.headintTitle, { userName: username })} />
+      <SubHeader title={intl.formatMessage(messages.headintTitle, { userName: username, platformName: PLATFORM_NAME })} />
       <Insight />
       <div className="tw-flex-1">
         {children}
