@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react';
 import { cn } from 'shared/lib/utils';
 import { useIntl, getLocale } from '@edx/frontend-platform/i18n';
 import messages from 'messages';
@@ -35,7 +34,7 @@ const getFakeData = (locale: string) => {
 
 const CourseUpdateBanner = ({ onClose }: { onClose: () => void }) => {
   const locale = getLocale();
-  const fakeData = useMemo(() => getFakeData(locale), [locale]);
+  const fakeData = getFakeData(locale);
   const { formatMessage } = useIntl();
 
   // TODO: Replace with actual data from backend when it's available
