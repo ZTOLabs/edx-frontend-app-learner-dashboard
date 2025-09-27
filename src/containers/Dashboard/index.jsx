@@ -13,15 +13,15 @@ export const Dashboard = () => {
   hooks.useInitializeDashboard();
   const initIsPending = reduxHooks.useRequestIsPending(RequestKeys.initialize);
 
+  if (initIsPending) {
+    return <LoadingView />;
+  }
+
   return (
     <div id="dashboard-content" data-testid="dashboard-content" className="tw-h-fit tw-pb-8">
-      {initIsPending
-        ? (<LoadingView />)
-        : (
-          <DashboardLayout>
-            <CoursesPanel />
-          </DashboardLayout>
-        )}
+      <DashboardLayout>
+        <CoursesPanel />
+      </DashboardLayout>
     </div>
   );
 };
