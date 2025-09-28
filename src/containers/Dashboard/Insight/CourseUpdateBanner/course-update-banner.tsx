@@ -21,7 +21,7 @@ const getFakeData = (locale: string) => {
     vi: [
       {
         id: 1,
-        content: 'Khóa học <a href="#">“AI dành cho nhà giáo dục: Từ kiến ​​thức đến ứng dụng thực tế”</a> sẽ kết thúc vào ngày 10 tháng 9 năm 2025',
+        content: 'Khóa học <a href="#">“AI dành cho nhà giáo dục: Từ kiến ​​thức đến ứng dụng thực tế”</a> sẽ kết thúc vào ngày 10/9/2025',
       },
       {
         id: 2,
